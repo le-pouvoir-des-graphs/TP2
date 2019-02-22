@@ -70,7 +70,8 @@ int main()
 	*/
 
 	Graph * mDjikstra = new Graph (7);
-	mDjikstra->init();
+	mDjikstra->hardCodedInit();
+	mDjikstra->mooreDijkstra(0);
 	mDjikstra->display();
 
 
