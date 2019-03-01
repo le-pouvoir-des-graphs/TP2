@@ -135,7 +135,7 @@ class Graph
 				}
 			} 
 
-			display_shortest_path (dist , src , pere); 
+			display_shortest_paths (dist , src , pere); 
 			return pere;
 		}
 };
