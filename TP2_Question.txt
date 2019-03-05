@@ -1,0 +1,12 @@
+
+Réponses aux questions 2 TP 2
+
+4 - Oui, il nous sortira toujours le même resultat => chemin le plus court ( minimum )
+
+5 - Il ne convergera pas car il ne prendra pas en compte les branche non-accessibles negatives
+
+6 - Il ne va pas converger => Random issue
+
+7 - On le remplira dans la condition de la boucle imbriquée
+
+8 -  Il sera équivalent a l'algo de Dijkstra

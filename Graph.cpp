@@ -1,26 +1,10 @@
-
 #include <iostream>
 #include <limits.h>
-#include <vector>
 #include <algorithm>
 
 using namespace std;
 
-
-struct Noeud 
-{
-	int pos;
-	int value;
-};
-
-struct Comparaison
-{
-	bool operator()(const Noeud & i, const Noeud & j)
-	{
-		return( i.value > j.value ); 
-	}
-};
-
+	
 class Graph
 {
 	int size;
@@ -28,6 +12,7 @@ class Graph
 	
 	public :
 
+		
 		Graph ( int x )
 		{
 			size = x ;
@@ -53,7 +38,7 @@ class Graph
 		{ 
 			size = 7;
 			int graphBis[size][size] = {	
-											{0,1,2,0,0,0,0},
+											{0 ,1,2,0,0,0,0},
 											{1,0,2,2,0,3,0},
 											{2,0,0,3,4,0,0},
 											{0,2,3,0,2,3,3},
@@ -117,7 +102,7 @@ class Graph
 		{
 			for (int i = 0; i < size ; i++)
 			{
-				printf(" - Atteindre le sommet %d depuis le sommet %d coutera au minimum : %d \n", i, src, dist[i]); 
+				cout << " - Atteindre le sommet " << i << " depuis le sommet " << src << " coutera au minimum : " << dist[i] << endl; 
 				//printf(" Le sommet pere de %d est %d\n", i , pere[i]  );
 				cout << " 	Plus court chemin : " ;
 				int tmp = i ;
@@ -166,52 +151,18 @@ class Graph
 			return pere;
 		}
 		
-		// mooreDijkstra  algo  
-		int * mooreDijkstraHeap (int src) 
-		{ 
-			vector<Noeud> d ;
-			bool pccTrouve[size];
-			int dist[size]; 
-			int * pere = new int[size];
-
-			
-			// Initialisation des valeurs
-			for (int i = 0; i < size ; i++) 
-				dist[i] = INT_MAX, pccTrouve[i] = false; 
-
-			dist[src] = 0;      // la distance d'un point a lui même est toujours 0
-			pere[0] = -1;       // Le sommet est son propre pere car il est le point de départ du chemin
-			
-			d.push_back(Noeud());
-			d.back().value = 0;
-			d.back().pos = src;
-			make_heap(d.begin(),d.end(),Comparaison());
-			pop_heap(d.begin(),d.end(),Comparaison());
-			int u = d.back().pos ;
-			int valueU = d.back().value ;
-			for (int count = 0; count < size -1; count++) 
-			{ 
-				pccTrouve[u] = true; 
-				// Mise a jour de la distance des sommets adjacent au sommet courant 
-				for (int v = 0; v < size ; v++) 
-				{
-					if (! pccTrouve[v] && graph[u][v] && valueU != INT_MAX && valueU + graph[u][v] < dist[v] )
-					{
-						d.push_back(Noeud());
-						d.back().value = valueU + graph[u][v];
-						d.back().pos = u ;
-						dist[v] = valueU + graph[u][v]; 
-						pere[v] = u ;
-						push_heap(d.begin(),d.end(),Comparaison());
-					}
-				}
-				pop_heap(d.begin(),d.end(),Comparaison());
-				u = d.back().pos ;
-				valueU = d.back().value ;
-			} 
-
-			display_shortest_paths (dist , src , pere); 
-			return pere;
-		}
 };
+
+int main()
+{
+
+	Graph * mDjikstra = new Graph (7);
+	mDjikstra->hardCodedInit();
+	mDjikstra->mooreDijkstra(0);
+	
+	cout << " \n Graphe : " << endl ;
+	mDjikstra->display();
+	
+	return(1);
+}
 
